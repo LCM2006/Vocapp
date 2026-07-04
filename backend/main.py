@@ -2,6 +2,24 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+words = {
+    "Ephemeral" : {
+        "Definition" : "Lasting for a very short time; fleeting or transient.",
+        "Example" : "The beautiful colors of the sunset were ephemeral, fading into darkness within minutes."},
+    "Adept" : {
+        "Definition" : "Highly skilled or proficient at something.",
+        "Example" : "She is highly adept at coding and can solve complex software bugs in seconds."},
+    "Dwindle" : {
+        "Definition" : "To gradually diminish in size, amount, or strength.",
+        "Example" : "Our water supplies began to dwindle as the hot summer days dragged on."},
+    "Mitigate" : {
+        "Definition": "To make something less severe, harmful, or painful.",
+        "Example" : "Planting more trees helps to mitigate the effects of climate change by absorbing carbon dioxide."},
+    "Ambiguous" : {
+        "Definition" : "Open to more than one interpretation; having a double meaning.",
+        "Example" : "The instructions were ambiguous, leaving the team confused about what to do next."}
+}
+
 @app.get("/")
 async def root():
     return{"message" : "FastAPI is working"}
@@ -9,4 +27,7 @@ async def root():
 
 @app.get("/word")
 async def word_d(query: str):
-    return {"word":"Lethargic", "definition":"experiencing a state of sluggishness, profound weariness, and a lack of mental alertness or energy", "example":"I feel lethergic if I sleep during the day"}
+    if (words.get(query.capitalize()) == None):
+        return{"message" : "Word not found in dictionary"}
+    else:
+        return words.get(query.capitalize())
