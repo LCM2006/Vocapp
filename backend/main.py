@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -20,6 +21,10 @@ words = {
         "Example" : "The instructions were ambiguous, leaving the team confused about what to do next."}
 }
 
+class Item(BaseModel):
+    word: str
+    sentence: str
+
 @app.get("/")
 async def root():
     return{"message" : "FastAPI is working"}
@@ -31,3 +36,7 @@ async def word_d(query: str):
         return{"message" : "Word not found in dictionary"}
     else:
         return words.get(query.capitalize())
+
+@app.post("/check-sentence")
+async def ex_check(item: Item):
+    return {"feedback": "AI feedback coming soon"}
