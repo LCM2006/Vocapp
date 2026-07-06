@@ -1,5 +1,14 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+import os
+from dotenv import load_dotenv
+from google import genai
+
+load_dotenv()
+load_dotenv()
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+
 
 app = FastAPI()
 
@@ -39,4 +48,11 @@ async def word_d(query: str):
 
 @app.post("/check-sentence")
 async def ex_check(item: Item):
-    return {"feedback": "AI feedback coming soon"}
+    interaction = client.interactions.create(
+        model = "gemini-3.5-flash",
+        input = f"The word is {item.word}. The user wrote: {item.sentence}. Is this correct usage? Explain simply."
+        )
+    print(interaction.output_text)
+    return {"feedback": interaction.output_text}
+
+
