@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <h1 id="title">Vocapp</h1>
+            <div id="search-section">
+                <input id="search-word" type="text" placeholder="Enter a word"/>
+                <input id="search-button" class="styled" type="button" value="Search Word">
+            </div>
+            <div id="definition-example-section">
+                <p class="label">Definition</p>
+                <p id="definition-display"></p>
+                <p class="label">Example</p>
+                <p id="example-display"></p>
+                <p class="label">Write your own example</p>
+                <p id="example"></p>
+                <textarea id="user-example" name="user-example" rows="5" cols="33"></textarea>
+                <input id="check-sentence" class="styled" type="button" value="Check Sentence">
+                <p id="display-aifeedback"></p>
+            </div>
+        </div>  
+        <script src="script.js"></script>
+    </body>   
+</html>

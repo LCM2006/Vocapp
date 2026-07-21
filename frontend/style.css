@@ -1,0 +1,91 @@
+body{
+    background-color: #f5f5f5;
+    font-family: 'Times New Roman', Times, serif;
+    min-height: 100vh;
+}
+
+#container{
+    width: min(90%, 900px);
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    
+}
+
+
+#search-section button, #definition-example-section button{
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#search-word{
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#search-button, #check-sentence{
+    background-color: #2563eb;
+    padding: 10px 16px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px
+}
+
+#definition-display, #example-display{
+    background-color: #eff6ff;
+    padding: 14px;
+    border-radius: 8px;
+    min-height: 40px;
+    margin-bottom: 16px;
+}
+
+#user-example{
+    background-color: #eff6ff;
+    padding: 14px;
+    border-radius: 8px;
+    min-height: 40px;
+    margin-bottom: 16px;
+}
+
+.label{
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+#user-example{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#display-aifeedback{
+    background-color: #f0fdf4;
+    padding: 14px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+#title{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: black;
+}
