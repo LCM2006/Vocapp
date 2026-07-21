@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
 from google import genai
+import requests
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -19,39 +20,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-words = {
-    "Ephemeral" : {
-        "Definition" : "Lasting for a very short time; fleeting or transient.",
-        "Example" : "The beautiful colors of the sunset were ephemeral, fading into darkness within minutes."},
-    "Adept" : {
-        "Definition" : "Highly skilled or proficient at something.",
-        "Example" : "She is highly adept at coding and can solve complex software bugs in seconds."},
-    "Dwindle" : {
-        "Definition" : "To gradually diminish in size, amount, or strength.",
-        "Example" : "Our water supplies began to dwindle as the hot summer days dragged on."},
-    "Mitigate" : {
-        "Definition": "To make something less severe, harmful, or painful.",
-        "Example" : "Planting more trees helps to mitigate the effects of climate change by absorbing carbon dioxide."},
-    "Ambiguous" : {
-        "Definition" : "Open to more than one interpretation; having a double meaning.",
-        "Example" : "The instructions were ambiguous, leaving the team confused about what to do next."}
-}
-
 class Item(BaseModel):
     word: str
     sentence: str
 
-@app.get("/")
-async def root():
-    return{"message" : "FastAPI is working"}
 
 
 @app.get("/word")
 async def word_d(query: str):
-    if (words.get(query.capitalize()) == None):
-        return{"message" : "Word not found in dictionary"}
+    dictionary = requests.get(f"https://api.dictionaryapi.dev/api/v2/entries/en/{query}")
+    if dictionary.status_code != 200:
+        return {"message": "Word not found"}
+    if("example" in dictionary.json()[0]["meanings"][0]["definitions"][0]):
+        return {"Definition": dictionary.json()[0]["meanings"][0]["definitions"][0]["definition"], "Example": dictionary.json()[0]["meanings"][0]["definitions"][0]["example"]}
     else:
-        return words.get(query.capitalize())
+        return {"Definition": dictionary.json()[0]["meanings"][0]["definitions"][0]["definition"], "Example": "No example for this word"}
 
 @app.post("/check-sentence")
 async def ex_check(item: Item):
