@@ -8,7 +8,7 @@ const definition_display = document.getElementById("definition-display")
 const example_display = document.getElementById("example-display")
 
 search_button.addEventListener("click", function() {
-    fetch('http://127.0.0.1:8000/word?query='+search_word.value)
+    fetch('https://vocapp-backend.onrender.com/word?query='+search_word.value)
     .then(response => response.json())
     .then(data => {
         if(data.message){
@@ -22,7 +22,7 @@ search_button.addEventListener("click", function() {
 })
 
 check_sentence.addEventListener('click', function(){
-    fetch('http://127.0.0.1:8000/check-sentence',{
+    fetch('https://vocapp-backend.onrender.com/check-sentence',{
         method: 'POST',
     headers: {
         "Content-Type": "application/json"
